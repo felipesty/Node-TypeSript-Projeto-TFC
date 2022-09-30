@@ -10,6 +10,9 @@ class App {
 
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
+    this.app.post('/login', (_req, res) => {
+      res.status(200).json();
+    });
   }
 
   private config():void {
