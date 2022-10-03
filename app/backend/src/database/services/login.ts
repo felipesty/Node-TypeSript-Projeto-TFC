@@ -12,11 +12,7 @@ type User = {
 class LoginService {
   login = async (email: string, password: string): Promise<User> => {
     const result = await Users.findOne({ where: { email } }) as Users;
-    if (!email || !password) {
-      return { message: 'All fields must be filled' };
-    }
-
-    const passValidation = await compare(password, result?.password);
+    const passValidation = await compare(password, result.password);
     if (!passValidation) {
       return { message: 'incorrect password' };
     }
