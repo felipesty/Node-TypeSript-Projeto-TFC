@@ -1,8 +1,10 @@
 import * as express from 'express';
 import LoginValitade from './database/middlewares/login';
 import LoginController from './database/controllers/loginController';
+import TeamController from './database/controllers/teamsController';
 
 const loginController = new LoginController();
+const teamsController = new TeamController();
 
 class App {
   public app: express.Express;
@@ -15,6 +17,7 @@ class App {
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
     this.app.post('/login', LoginValitade, loginController.login);
+    this.app.get('/teams', teamsController.getAll);
   }
 
   private config():void {
