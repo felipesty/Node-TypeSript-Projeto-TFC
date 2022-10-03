@@ -4,13 +4,13 @@ import Users from '../models/user';
 
 const JWT_SECRET = 'jwt_secret';
 
-type mode = {
+type User = {
   message?: string;
   token?: string;
 };
 
 class LoginService {
-  login = async (email: string, password: string): Promise<mode> => {
+  login = async (email: string, password: string): Promise<User> => {
     const result = await Users.findOne({ where: { email } }) as Users;
     if (!email || !password) {
       return { message: 'All fields must be filled' };
