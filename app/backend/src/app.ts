@@ -2,7 +2,9 @@ import * as express from 'express';
 import LoginValitade from './database/middlewares/login';
 import LoginController from './database/controllers/loginController';
 import TeamController from './database/controllers/teamsController';
+import MatcheController from './database/controllers/matcheController';
 
+const matcheController = new MatcheController();
 const loginController = new LoginController();
 const teamsController = new TeamController();
 
@@ -19,6 +21,7 @@ class App {
     this.app.post('/login', LoginValitade, loginController.login);
     this.app.get('/teams', teamsController.getAll);
     this.app.get('/teams/:id', teamsController.getById);
+    this.app.get('/matches', matcheController.getAll);
   }
 
   private config():void {
