@@ -5,6 +5,11 @@ class TeamService {
     const result = await Teams.findAll();
     return result;
   };
+
+  getById = async (id: string): Promise<Teams | null> => {
+    const result = await Teams.findByPk(id);
+    return result;
+  };
 }
 
 export default TeamService;
