@@ -1,12 +1,7 @@
 import * as express from 'express';
-import LoginValitade from './database/middlewares/login';
-import LoginController from './database/controllers/loginController';
-import TeamController from './database/controllers/teamsController';
-import MatcheController from './database/controllers/matcheController';
-
-const matcheController = new MatcheController();
-const loginController = new LoginController();
-const teamsController = new TeamController();
+import loginRoute from './database/routes/loginroute';
+import matchRoute from './database/routes/matcheRoute';
+import teamRoute from './database/routes/teamsroute';
 
 class App {
   public app: express.Express;
@@ -18,10 +13,9 @@ class App {
 
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
-    this.app.post('/login', LoginValitade, loginController.login);
-    this.app.get('/teams', teamsController.getAll);
-    this.app.get('/teams/:id', teamsController.getById);
-    this.app.get('/matches', matcheController.getAll);
+    this.app.use('/', loginRoute);
+    this.app.use('/', teamRoute);
+    this.app.use('/', matchRoute);
   }
 
   private config():void {
