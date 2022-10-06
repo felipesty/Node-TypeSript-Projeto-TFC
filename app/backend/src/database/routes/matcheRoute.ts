@@ -1,10 +1,10 @@
 import * as express from 'express';
 import MatcheController from '../controllers/matcheController';
 
-const matchRoute = express.Router();
+const matcheRoute = express.Router();
 const matcheController = new MatcheController();
 
-matchRoute.get('/matches', matcheController.getAll);
-matchRoute.post('matches', matcheController.create);
+matcheRoute.get('/matches', matcheController.getAll);
+matcheRoute.post('/matches', matcheController.create);
 
-export default matchRoute;
+export default matcheRoute;

@@ -9,6 +9,10 @@ class LoginController {
     const { token } = await this.loginService.login(email, password);
     res.status(200).json({ token });
   };
+
+  loginValidate = (req: Request, res: Response) => {
+    res.status(200).json({ role: 'admin' });
+  };
 }
 
 export default LoginController;

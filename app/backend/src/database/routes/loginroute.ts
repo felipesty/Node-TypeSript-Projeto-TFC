@@ -5,6 +5,7 @@ import LoginValitade from '../middlewares/login';
 const loginRoute = express.Router();
 const loginController = new LoginController();
 
-loginRoute.post('/lohin', LoginValitade, loginController.login);
+loginRoute.post('/login', LoginValitade, loginController.login);
+loginRoute.get('/login/validate', loginController.loginValidate);
 
 export default loginRoute;
