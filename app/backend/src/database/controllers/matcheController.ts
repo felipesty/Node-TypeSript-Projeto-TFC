@@ -14,6 +14,10 @@ class MatcheController {
     const create = await this.matcheService.create(
       { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals, inProgress } as ICreate,
     );
+    if (homeTeam === awayTeam) {
+      return res.status(401)
+        .json({ message: 'It is not possible to create a match with two equal teams' });
+    }
     res.status(201).json(create);
   };
 
