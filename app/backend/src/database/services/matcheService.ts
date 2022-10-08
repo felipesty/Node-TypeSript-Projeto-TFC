@@ -38,6 +38,11 @@ class MatcheService {
     });
     return create as unknown as ICreate;
   };
+
+  update = async (id: string): Promise<[number, Matches[]]> => {
+    const update = Matches.update({ inProgress: false }, { where: { id } });
+    return update;
+  };
 }
 
 export default MatcheService;

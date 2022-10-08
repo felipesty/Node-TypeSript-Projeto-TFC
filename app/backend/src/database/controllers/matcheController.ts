@@ -16,6 +16,13 @@ class MatcheController {
     );
     res.status(201).json(create);
   };
+
+  update = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const update = await this.matcheService.update(id);
+    if (!update) res.status(400).json({ message: 'erro' });
+    res.status(200).json({ message: 'Finished' });
+  };
 }
 
 export default MatcheController;
