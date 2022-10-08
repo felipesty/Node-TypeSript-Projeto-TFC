@@ -11,27 +11,23 @@ class MatcheController {
   };
 
   create = async (req: Request, res: Response) => {
-    const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = req.body;
+    const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals, inProgress } = req.body;
     const { authorization } = req.headers;
 
     if (!authorization) throw new Error('Erro token');
 
-    const validToken = jwt.decode(authorization);
+    const validationToken = jwt.decode(authorization);
 
-    if (!validToken) return res.status(401).json({ message: 'Token must be a valid token' });
+    if (!validationToken) return res.status(401).json({ message: 'Token must be a valid token' });
 
     const create = await this.matcheService.create(
-      { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } as ICreate,
+      { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals, inProgress } as ICreate,
     );
 
     if (homeTeam === awayTeam) {
       return res.status(401)
         .json({ message: 'It is not possible to create a match with two equal teams' });
     }
-
-    // if (!create) {
-    //   return res.status(404).json({ message: 'There is no team with such id!' });
-    // }
     res.status(201).json(create);
   };
 
