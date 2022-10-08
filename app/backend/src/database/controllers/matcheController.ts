@@ -37,6 +37,13 @@ class MatcheController {
     if (!update) res.status(400).json({ message: 'erro' });
     res.status(200).json({ message: 'Finished' });
   };
+
+  updateGoal = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+    const update = await this.matcheService.updateGoal(id, homeTeamGoals, awayTeamGoals);
+    res.status(200).json({ update });
+  };
 }
 
 export default MatcheController;

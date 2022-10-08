@@ -43,6 +43,15 @@ class MatcheService {
     const update = Matches.update({ inProgress: false }, { where: { id } });
     return update;
   };
+
+  updateGoal = async (
+    id: string,
+    homeTeamGoals: string,
+    awayTeamGoals: string,
+  ): Promise<[number, Matches[]]> => {
+    const update = Matches.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+    return update;
+  };
 }
 
 export default MatcheService;
