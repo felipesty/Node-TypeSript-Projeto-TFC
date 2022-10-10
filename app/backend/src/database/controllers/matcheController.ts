@@ -1,9 +1,13 @@
 import { Request, Response } from 'express';
 import * as jwt from 'jsonwebtoken';
 import MatcheService, { ICreate } from '../services/matcheService';
+import TeamService from '../services/teamsService';
 
 class MatcheController {
-  constructor(private matcheService = new MatcheService()) {}
+  constructor(
+    private matcheService = new MatcheService(),
+    private teamService = new TeamService(),
+  ) {}
 
   getAll = async (_req: Request, res: Response) => {
     const result = await this.matcheService.getAll();
@@ -11,18 +15,20 @@ class MatcheController {
   };
 
   create = async (req: Request, res: Response) => {
-    const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals, inProgress } = req.body;
+    const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = req.body;
     const { authorization } = req.headers;
-
     if (!authorization) throw new Error('Erro token');
-
     const validationToken = jwt.decode(authorization);
 
-    if (!validationToken) return res.status(401).json({ message: 'Token must be a valid token' });
-
+    if (!validationToken) {
+      return res.status(401).send({ message: 'Token must be a valid token' });
+    }
     const create = await this.matcheService.create(
-      { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals, inProgress } as ICreate,
+      { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } as ICreate,
     );
+    const teamHome = await this.teamService.getById(homeTeam);
+    const teamAway = await this.teamService.getById(awayTeam);
+    if (!teamHome || !teamAway) res.status(404).json({ message: 'There is no team with such id!' });
 
     if (homeTeam === awayTeam) {
       return res.status(401)

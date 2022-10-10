@@ -12,7 +12,7 @@ class TeamController {
   getById = async (req: Request, res: Response) => {
     const { id } = req.params;
     const result = await this.teamService.getById(id);
-    if (!result) res.status(400).json({ message: 'erro' });
+    if (!result) res.status(404).json({ message: 'There is no team with such id!' });
     res.status(200).json(result);
   };
 }

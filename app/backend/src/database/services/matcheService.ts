@@ -28,13 +28,13 @@ class MatcheService {
   };
 
   create = async (params: ICreate): Promise<ICreate> => {
-    const { homeTeam, homeTeamGoals, awayTeam, awayTeamGoals, inProgress } = params;
+    const { homeTeam, homeTeamGoals, awayTeam, awayTeamGoals } = params;
     const create = await Matches.create({
       homeTeam,
       homeTeamGoals,
       awayTeam,
       awayTeamGoals,
-      inProgress,
+      inProgress: true,
     });
     return create as unknown as ICreate;
   };
