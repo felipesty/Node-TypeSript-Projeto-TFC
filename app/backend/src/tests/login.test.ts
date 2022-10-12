@@ -8,14 +8,15 @@ import { app } from '../app';
 chai.use(chaiHttp);
 
 const { expect } = chai;
+const admin = {
+  email: 'admin@admin.com',
+  password: 'secret_admin',
+}
 
 describe('/login', () => {
   describe('/Post', () => {
     it('deve fazer login com sucesso', async () => {
-      const response = await chai.request(app).post('/login').send({
-        email: 'user@user.com',
-        password: '$2a$08$Y8Abi8jXvsXyqm.rmp0B.uQBA5qUz7T6Ghlg/CvVr/gLxYj5UAZVO',
-      });
+      const response = await chai.request(app).post('/login').send(admin);
       expect(response.status).to.equal(200);
     });
   });
