@@ -1,16 +1,12 @@
 import { compare } from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import Users from '../models/user';
+import IUser from '../Interfaces/IUser';
 
 const JWT_SECRET = 'jwt_secret';
 
-type User = {
-  message?: string;
-  token?: string;
-};
-
 class LoginService {
-  login = async (email: string, password: string): Promise<User> => {
+  login = async (email: string, password: string): Promise<IUser> => {
     const result = await Users.findOne({ where: { email } }) as Users;
     const passValidation = await compare(password, result.password);
     if (!passValidation) {

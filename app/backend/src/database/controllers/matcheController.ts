@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
-import MatcheService, { ICreate } from '../services/matcheService';
+import MatcheService from '../services/matcheService';
 import TeamService from '../services/teamsService';
+import ICreate from '../Interfaces/ICreate';
 
 class MatcheController {
   constructor(

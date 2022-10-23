@@ -1,20 +1,6 @@
 import Matches from '../models/matches';
 import Teams from '../models/teams';
-
-interface ICreate {
-  id?: number;
-  homeTeam: number;
-  awayTeam: number;
-  homeTeamGoals: number;
-  awayTeamGoals: number;
-  inProgress: boolean;
-  teamHome: {
-    teamName: string;
-  };
-  teamAway: {
-    teamName: string;
-  };
-}
+import ICreate from '../Interfaces/ICreate';
 
 class MatcheService {
   getAll = async (): Promise<Matches[]> => {
@@ -55,5 +41,3 @@ class MatcheService {
 }
 
 export default MatcheService;
-
-export { ICreate };

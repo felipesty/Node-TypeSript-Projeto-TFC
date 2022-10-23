@@ -1,18 +1,6 @@
 import Teams from '../models/teams';
 import Matches from '../models/matches';
-
-interface ILeaderboard {
-  name: string,
-  totalPoints: number,
-  totalGames: number,
-  totalVictories: number,
-  totalDraws: number,
-  totalLosses: number,
-  goalsFavor: number,
-  goalsOwn: number,
-  goalsBalance: number,
-  efficiency: string,
-}
+import ILeaderboard from '../Interfaces/ILeaderboars';
 
 class LeaderboardService {
   homeVictories = (match: any): number => {
