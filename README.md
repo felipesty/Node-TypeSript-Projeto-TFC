@@ -14,7 +14,6 @@ Com tudo isso foi preciso fazer os seguintes requisitos:
 ## Obs:
 O front-end desse projeto já estava pronto, sendo assim, o que desenvolvi foram os requisitos descritos acima.
 
----
 ## Tecnologias utilizadas
  - Node.js
  - Express
